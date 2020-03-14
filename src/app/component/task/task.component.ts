@@ -1,6 +1,6 @@
 import {
   Component,
-  EventEmitter,
+  EventEmitter, HostListener,
   Input,
   OnInit,
   Output
@@ -23,30 +23,62 @@ export interface ITask {
 }
 
 
-@Component({
-  selector: 'app-task',
-  template: `
+@Component( {
+  selector : 'app-task',
+  template : `
     <div class="list-item">
+      <input type="checkbox" [checked]="task.state==taskState.Task_ARCHIVED">
       <input type="text" [value]="task.title" readonly="true"/>
+      <span
+        (click)="onStarClick()" class="black-star" [ngClass]="{'pinned': task.state==taskState.Task_PINNED}">★</span>
+    </div>
+    <div>
+      {{task.state}}
     </div>
   `,
-  styleUrls: ['./task.component.css']
-})
+  styleUrls: [ './task.component.css' ]
+} )
 export class TaskComponent implements OnInit {
 
 
+
   title: string;
+  taskState = TaskState;
 
   @Input() task: ITask;
 
-  @Output() onPinTask: EventEmitter<any> = new EventEmitter();
+  @Output() onPinTask: EventEmitter<any>     = new EventEmitter();
   @Output() onArchiveTask: EventEmitter<any> = new EventEmitter();
 
+  @HostListener('change', ['$event.target'])
+  onChange(checkbox) {
+    console.log('checkbox: ', checkbox.checked);
 
-  constructor() {
+    this.task.state !== TaskState.Task_ARCHIVED ? this.task.state = TaskState.Task_ARCHIVED : this.task.state = TaskState.Task_INBOX;
+    if (checkbox.checked) {
+      this.onArchiveTask.emit( true );
+    }
   }
 
-  ngOnInit(): void {
+
+  constructor () {
   }
+
+
+
+  ngOnInit (): void {
+  }
+
+
+
+
+  onStarClick () {
+    this.task.state !== TaskState.Task_PINNED ? this.task.state = TaskState.Task_PINNED : this.task.state = TaskState.Task_INBOX;
+
+    if (this.task.state === TaskState.Task_PINNED) {
+      this.onPinTask.emit( true );
+    }
+  }
+
 
 }

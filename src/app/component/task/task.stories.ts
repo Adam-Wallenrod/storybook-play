@@ -26,7 +26,7 @@ export const Default = () => ({
   props: {
     task: taskData,
     onPinTask: actionsData.onPinTask,
-    onArchivedTask: actionsData.onArchivedTask
+    onArchiveTask: actionsData.onArchivedTask
   }
 });
 
@@ -36,7 +36,7 @@ export const Pinned = () => ({
   props: {
     task: {...taskData, state: TaskState.Task_PINNED },
     onPinTask: actionsData.onPinTask,
-    onArchivedTask: actionsData.onArchivedTask
+    onArchiveTask: actionsData.onArchivedTask
   }
 });
 
@@ -46,6 +46,6 @@ export const Archived = () => ({
   props: {
     task: {...taskData, state: TaskState.Task_ARCHIVED },
     onPinTask: actionsData.onPinTask,
-    onArchivedTask: actionsData.onArchivedTask
+    onArchiveTask: actionsData.onArchivedTask
   }
 });

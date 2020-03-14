@@ -1,0 +1,19 @@
+.list-item * {
+  vertical-align: middle;
+  border: none;
+}
+
+[type="text"] {
+  margin: 0 10px;
+}
+
+.black-star {
+  cursor: pointer;
+  width: 50px;
+  opacity: 0.2;
+}
+
+.black-star.pinned {
+  opacity: 1;
+
+}
