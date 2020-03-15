@@ -27,8 +27,8 @@ export interface ITask {
   selector : 'app-task',
   template : `
     <div class="list-item">
-      <input type="checkbox" [checked]="task.state==taskState.Task_ARCHIVED">
-      <input type="text" [value]="task.title" readonly="true"/>
+      <input id="checkbox" type="checkbox" [checked]="task.state==taskState.Task_ARCHIVED">
+      <label for="checkbox">{{task.title}}</label>
       <span
         (click)="onStarClick()" class="black-star" [ngClass]="{'pinned': task.state==taskState.Task_PINNED}">★</span>
     </div>

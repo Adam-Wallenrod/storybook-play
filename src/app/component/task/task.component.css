@@ -3,8 +3,62 @@
   border: none;
 }
 
-[type="text"] {
-  margin: 0 10px;
+.list-item label {
+  position: relative;
+}
+
+.list-item label::before,
+.list-item label::after {
+  position: absolute;
+}
+
+.list-item label::before {
+  content: "";
+  display: inline-block;
+
+  height: 16px;
+  width: 16px;
+  border: 1px solid;
+  top: -1px;
+  left: 0px;
+}
+
+.list-item label::after {
+  content: "";
+  display: inline-block;
+
+  height: 5px;
+  width: 9px;
+  left: 4px;
+  top: 2px;
+
+  border-left: 2px solid;
+  border-bottom: 2px solid;
+  transform: rotate(-45deg);
+}
+
+
+.list-item input[type="checkbox"] + label::after {
+  content: none;
+}
+
+.list-item input[type="checkbox"]:checked + label::after {
+  content: "";
+}
+
+/*Adding focus styles on the outer-box of the fake checkbox*/
+.list-item input[type="checkbox"]:focus + label::before {
+  outline: rgb(59, 153, 252) auto 5px;
+}
+
+label {
+  margin-right: 10px;
+  padding-left: 26px;
+  width: 300px;
+}
+
+#checkbox {
+  visibility: hidden;
 }
 
 .black-star {
